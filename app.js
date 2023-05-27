@@ -17,32 +17,24 @@ mongoose.connect("mongodb://localhost:27017/hackoverflowDB");
 const studentSchema = {
     studentId: String,
     firstName: String,
-    lastName: String
+    lastName: String,
+    email: String,
+    userName: String,
+    password: String,
+    address: String,
+    address2: String,
+    city: String,
+    state: String,
+    zip: String
 };
 
 const Student = mongoose.model("student", studentSchema);
 
-const student1 = new Student({
-    studentId: "123",
-    firstName: "suchith",
-    lastName: "kumar"
-});
-const student2 = new Student({
-    studentId: "123",
-    firstName: "suchith",
-    lastName: "kumar"
-});
-
-const defaultStudents = [student1, student2];
-Student.insertMany(defaultStudents)
-    .then(() => {
-        console.log('Students saved successfully');
-    })
-    .catch((error) => {
-        console.error(error);
-    });
-
 app.get("/register/student", function (req, res) {
+    res.render("student");
+});
+
+app.get("/register/course", function (req, res) {
     res.render("student");
 });
 
@@ -51,22 +43,28 @@ app.post("/register/student", function (req, res) {
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
 
-    // Save the student to the database
     const student = new Student({
-        studentId: studentId,
-        firstName: firstName,
-        lastName: lastName
+        studentId: req.body.studentId,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        userName: req.body.userName,
+        password: req.body.password,
+        address: req.body.address,
+        address2: req.body.address2,
+        city: req.body.city,
+        state: req.body.state,
+        zip: req.body.zip
     });
 
-    student.save()
+    Student.insertMany(student)
         .then(() => {
-            console.log("Student inserted successfully");
-            res.redirect("/register/student");
+            console.log('Students saved successfully');
         })
         .catch((error) => {
-            console.error("Error inserting student:", error);
-            res.redirect("/register/student");
+            console.error(error);
         });
+
 });
 
 app.listen(3000, function () {
