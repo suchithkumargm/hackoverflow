@@ -1,0 +1,33 @@
+<%- include("header")-%>
+
+  
+  <div class="container">
+        <form action="/" method="post">
+            <h1>Course Registration</h1>
+            <div class="form-group">
+                <label for="exampleInputName" >Student Name</label>
+                <input type="text"  name="studentname"class="form-control" id="exampleInputName" aria-describedby="StudentHelp" placeholder="Enter Name">
+                    <label for="exampleFormControlSelect1" >Course Name</label>
+                    <select class="form-control" name="coursename" id="exampleFormControlSelect1">
+                      <option>Engineering</option>
+                      <option>Bcom</option>
+                      <option>MBA</option>
+                      <option>BCA</option>
+                    </select>
+              <label for="exampleInputEmail1" >Email address</label>
+              <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPhone">Phone Number</label>
+              <input type="number" name="phone" class="form-control" id="exampleInputPhone" placeholder="Phone number">
+            </div>
+            <div class="form-group form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+          </form>
+    </div>
+
+<%- include("footer")-%>

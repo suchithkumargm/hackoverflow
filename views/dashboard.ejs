@@ -1,0 +1,26 @@
+<%- include("header")-%>
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Student Name</th>
+            <th scope="col">Course Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+
+            <% for(let i=0;i<foundCourses.length;i++){ %>
+                <td><%=foundCourses[i].studentname%></td>
+                <td><%=foundCourses[i].coursename%></td>
+                <td><%=foundCourses[i].email%></td>
+                <td><%=foundCourses[i].phone%></td>
+            <% } %>
+        
+          </tr>
+        </tbody>
+      </table>
+</div>
+<%- include("footer")-%>
