@@ -38,6 +38,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
+const sendmail=require("./mailsending.js");
 
 const app = express();
 
@@ -78,7 +79,7 @@ const Student = mongoose.model("student", studentSchema);
 // const defaultcourses = [course1, course2];
 
 
-app.get("/", function (req, res) {
+app.get("/register/course", function (req, res) {
     res.render("course");
     // Course.find({})
     // .then((foundCourses)=>{
@@ -107,7 +108,7 @@ app.get("/dashboard", function (req, res) {
   })
 });
 
-app.post("/", function (req, res) {
+app.post("/register/course", function (req, res) {
 
 
   var studentname=req.body.studentname;
@@ -127,6 +128,7 @@ app.post("/", function (req, res) {
   });
   Course.insertMany(course1)
     .then(() => {
+        sendmail(email);
         // window.alert('Details saved successfully');
         res.redirect("/register/student")
     })
