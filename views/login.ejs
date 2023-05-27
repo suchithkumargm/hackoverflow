@@ -1,0 +1,18 @@
+<%- include("header") -%>
+
+<div class="container w-50">
+
+<form class="form-signin" action="/login/<%=type%>" method="post">
+    <img class="mb-4 rounded-circle mx-auto d-block" src="https://images.unsplash.com/photo-1489945052260-4f21c52268b9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Sign in</h1>
+    <label for="inputEmail" class="sr-only">User Name</label>
+    <input type="text" name="userName" id="inputEmail" class="form-control" placeholder="User Name" required="" autofocus="">
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required="">
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <p class="mt-5 mb-3 text-muted">© 2017-2018</p>
+  </form>
+
+</div>
+
+    <%- include("footer") -%>

@@ -30,19 +30,35 @@ const studentSchema = {
 
 const Student = mongoose.model("student", studentSchema);
 
+const courseSchema = {
+    studentname: String,
+    coursename: String,
+    email: String,
+    phone: Number
+};
+
+const Course = mongoose.model("course", courseSchema);
+
+const adminSchema = {
+    adminId:String,
+    password:String
+};
+
+const Admin= mongoose.model("admin", adminSchema);
+
 app.get("/register/student", function (req, res) {
     res.render("student");
 });
 
 app.get("/register/course", function (req, res) {
-    res.render("student");
+    res.render("course");
 });
 
-app.post("/register/student", function (req, res) {
-    const studentId = req.body.studentId;
-    const firstName = req.body.firstName;
-    const lastName = req.body.lastName;
+app.get("/login/:type", function (req, res) {
+    res.render("login", { type:req.params.type });
+})
 
+app.post("/register/student", function (req, res) {
     const student = new Student({
         studentId: req.body.studentId,
         firstName: req.body.firstName,
@@ -60,11 +76,65 @@ app.post("/register/student", function (req, res) {
     Student.insertMany(student)
         .then(() => {
             console.log('Students saved successfully');
+            res.redirect("/login/student");
         })
         .catch((error) => {
             console.error(error);
         });
 
+});
+
+app.post("/register/course", function (req, res) {
+    var studentname = req.body.studentname;
+    var coursename = req.body.coursename;
+    var email = req.body.email;
+    var phone = req.body.phone;
+    const course = new Course({
+        studentname: studentname,
+        coursename: coursename,
+        email: email,
+        phone: phone
+    });
+    Course.insertMany(course)
+        .then(() => {
+            res.redirect("/register/student")
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+});
+
+app.post("/login/student", function (req, res) {
+    const userName = req.body.userName;
+    const password = req.body.password;
+    Student.findOne({ userName: userName, password: password })
+        .then(user => {
+            if (user) {
+                console.log("found");
+            } else {
+                console.log(" not found");
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        });
+});
+
+app.post("/login/admin", function (req, res) {
+    const adminId = req.body.userName;
+    const password = req.body.password;
+    console.log(adminId,password);
+    Admin.findOne({ adminId:adminId, password: password })
+        .then(admin => {
+            if (admin) {
+                console.log("found");
+            } else {
+                console.log(" not found");
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        });
 });
 
 app.listen(3000, function () {
